@@ -1,0 +1,12 @@
+---
+name: busy
+
+services:
+  busy:
+    image: busybox:1.28
+    container_name: busy
+    hostname: busy
+    command:
+      - sleep
+      - "3600"
+    restart: always
