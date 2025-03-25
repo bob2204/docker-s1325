@@ -1,0 +1,13 @@
+---
+services:
+  web:
+    image: nginx:1.26
+    container_name: www
+    hostname: nginx
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./html:/usr/share/nginx/html
+      - ./nginx-conf:/etc/nginx/conf.d
+    networks:
