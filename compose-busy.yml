@@ -9,4 +9,21 @@ services:
     command:
       - sleep
       - "3600"
+    networks:
+      busy:
+        ipv4_address: 172.32.0.10 
+      lempnet:
     restart: always
+
+networks:
+  busy:
+    name: busynet
+    ipam:
+      config:
+      - subnet: 172.32.0.0/24
+        gateway: 172.32.0.254
+    driver_opts:
+      com.docker.network.bridge.name: busynet0
+  lempnet:
+    name: lempnet
+    external: true
