@@ -6,6 +6,9 @@ services:
     image: busybox:1.28
     container_name: busy
     hostname: busy
+    environment:
+      - USER=bob
+      - PASSWORD=azerty
     command:
       - sleep
       - "3600"
