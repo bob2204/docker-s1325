@@ -9,6 +9,10 @@ services:
     environment:
       - USER=bob
       - PASSWORD=azerty
+    volumes:
+      - ./html:/data
+      - busyvol:/config
+      - mariadb:/db
     command:
       - sleep
       - "3600"
@@ -29,4 +33,9 @@ networks:
       com.docker.network.bridge.name: busynet0
   lempnet:
     name: lempnet
+    external: true
+
+volumes:
+  busyvol:
+  mariadb:
     external: true
