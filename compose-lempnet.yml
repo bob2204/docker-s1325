@@ -1,4 +1,5 @@
 ---
+name: lempnet
 services:
   web:
     image: nginx:1.26
