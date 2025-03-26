@@ -1,0 +1,10 @@
+---
+services:
+  hello-http:
+    image: hello-http:0.0
+    container_name: hello
+    hostname: hello-http
+    ports:
+      - 8080:8080
+    volumes:
+      - ./hello-http.d:/var/lib/hello-http
