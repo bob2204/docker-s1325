@@ -16,7 +16,12 @@ services:
         ipv4_address: 172.30.0.100
 
   php:
-    image: php:8.2-fpm
+    image: php-mysql:8.2-fpm
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM php:8.2-fpm
+        RUN  docker-php-ext-install pdo_mysql
     container_name: php
     hostname: php
     restart: always
