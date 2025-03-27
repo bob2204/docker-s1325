@@ -31,15 +31,14 @@ services:
     <<: *default-logging
 
   php:
-    image: php-status:8.2-fpm
+    image: localhost:5000/php-mysql:8.2-fpm
     container_name: php
     hostname: php
     restart: always
     volumes:
       - ./html:/var/www/html
-      - ./phptool:/tools
     healthcheck:
-      test: ["CMD-SHELL","/tools/php-fpm-healthcheck"]
+      test: ["CMD-SHELL","/usr/local/bin/php-fpm-healthcheck"]
       interval: 2s
       retries: 2
       start_period: 5s

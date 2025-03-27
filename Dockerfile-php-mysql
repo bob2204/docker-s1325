@@ -1,0 +1,7 @@
+FROM php:8.2-fpm
+RUN  docker-php-ext-install pdo_mysql \
+     && apt update \
+     && apt install -y libfcgi-bin \
+     && curl https://raw.githubusercontent.com/renatomefi/php-fpm-healthcheck/master/php-fpm-healthcheck > /usr/local/bin/php-fpm-healthcheck \
+     && chmod +x /usr/local/bin/php-fpm-healthcheck \
+     && sed -Ei "s:^;(pm.status_path = /status):\1:" /usr/local/etc/php-fpm.d/www.conf
