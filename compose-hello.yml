@@ -24,7 +24,14 @@ services:
     ports:
       - 82:8080
     networks:
+      proxynet:
       hellonet:
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik_proxynet
+      - traefik.http.routers.hello_2.rule=PathPrefix(`/hello-2`)
+      - traefik.http.middlewares.striphello_2.stripprefix.prefixes=/hello-2
+      - traefik.http.routers.hello_2.middlewares=striphello_2
 
   hello-3:
     image: bob2606/hello-http:0.8.27
@@ -34,7 +41,14 @@ services:
     ports:
       - 83:8080
     networks:
+      proxynet:
       hellonet:
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik_proxynet
+      - traefik.http.routers.hello_3.rule=(Host(`hello-3.stage.lan`) && PathPrefix(`/hello-3`))
+      - traefik.http.middlewares.striphello_3.stripprefix.prefixes=/hello-3
+      - traefik.http.routers.hello_3.middlewares=striphello_3
 
 networks:
   hellonet:
