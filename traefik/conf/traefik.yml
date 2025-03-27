@@ -13,3 +13,4 @@ api:
 providers:
   docker:
     endpoint: "unix:///run/docker.sock"
+    exposedByDefault: false
