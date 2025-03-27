@@ -8,6 +8,8 @@ services:
     restart: always
     ports:
       - 81:8080
+    labels:
+      - traefik.enable=true
 
   hello-2:
     image: bob2606/hello-http:0.8.27
