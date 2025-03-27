@@ -12,6 +12,10 @@ services:
       - traefik.enable=true
       - traefik.docker.network=traefik_proxynet
       - traefik.http.routers.hello_1.rule=Host(`hello-1.stage.lan`)
+      - traefik.http.middlewares.errhello_1.errors.status=400-599
+      - traefik.http.middlewares.errhello_1.errors.service=errorhandler-traefik
+      - traefik.http.middlewares.errhello_1.errors.query=/{status}.html
+      - traefik.http.routers.hello_1.middlewares=errhello_1
     networks:
       proxynet:
       hellonet:

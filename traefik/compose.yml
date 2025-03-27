@@ -14,5 +14,17 @@ services:
     networks:
       proxynet:
 
+  errorhandler:
+    image: nginx:1.26
+    container_name: errorhandler
+    networks:
+      proxynet:
+    volumes:
+      - ./errorpages:/usr/share/nginx/html
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.errhandler.rule=Host(`errorhandler`)
+
 networks:
   proxynet:
