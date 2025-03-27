@@ -10,6 +10,11 @@ services:
       - 81:8080
     labels:
       - traefik.enable=true
+      - traefik.docker.network=traefik_proxynet
+      - traefik.http.routers.hello_1.rule=Host(`hello-1.stage.lan`)
+    networks:
+      proxynet:
+      hellonet:
 
   hello-2:
     image: bob2606/hello-http:0.8.27
@@ -18,6 +23,8 @@ services:
     restart: always
     ports:
       - 82:8080
+    networks:
+      hellonet:
 
   hello-3:
     image: bob2606/hello-http:0.8.27
@@ -26,3 +33,11 @@ services:
     restart: always
     ports:
       - 83:8080
+    networks:
+      hellonet:
+
+networks:
+  hellonet:
+  proxynet:
+    name: traefik_proxynet
+    external: true
