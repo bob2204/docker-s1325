@@ -1,0 +1,46 @@
+---
+name: mariadb
+services:
+  db:
+    image: mariadb:10.8
+    container_name: mariadb
+    hostname: mariadb
+    environment:
+      - MARIADB_ROOT_PASSWORD=azerty
+      - MARIADB_DATABASE=stage
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: always
+    networks:
+      dbnet:
+        ipv4_address: 172.31.0.100
+    profiles:
+      - mariadb
+
+  db-backup:
+    image: alpine
+    container_name: backup
+    volumes:
+      - mariadb:/var/lib/mysql:ro
+      - ./backup:/backup
+    networks:
+      dbnet:
+    command:
+      - cp
+      - -a
+      - /var/lib/mysql
+      - /backup/mysql
+    profiles:
+      - backup
+
+networks:
+  dbnet:
+    ipam:
+      config:
+        - subnet: 172.31.0.0/16
+          gateway: 172.31.0.254
+    driver_opts:
+      com.docker.network.bridge.name: dbnet0
+
+volumes:
+  mariadb:
