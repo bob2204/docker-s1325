@@ -1,0 +1,26 @@
+---
+name: hello
+services:
+  hello-1:
+    image: bob2606/hello-http:0.8.27
+    container_name: hello-1
+    hostname: hello-1
+    restart: always
+    ports:
+      - 81:8080
+
+  hello-2:
+    image: bob2606/hello-http:0.8.27
+    container_name: hello-2
+    hostname: hello-2
+    restart: always
+    ports:
+      - 82:8080
+
+  hello-3:
+    image: bob2606/hello-http:0.8.27
+    container_name: hello-3
+    hostname: hello-3
+    restart: always
+    ports:
+      - 83:8080
